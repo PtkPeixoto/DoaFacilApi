@@ -60,6 +60,9 @@ class DoaFacilController extends Controller
     public function getUsers(Request $request)
     {
         $user = User::get();
+        if ($user->isEmpty()) {
+            return response()->json(['message' => 'Nenhum usuário encontrado!'], 201);
+        }
         return response()->json($user);
     }
 
@@ -149,7 +152,9 @@ class DoaFacilController extends Controller
     public function donations(Request $request)
     {
         $donations = Donation::where('status', 'active')->get();
-
+        if ($donations->isEmpty()) {
+            return response()->json(['message' => 'Nenhuma doação encontrada!'], 201);
+        }
         return response()->json($donations);
     }
 
@@ -259,6 +264,9 @@ class DoaFacilController extends Controller
     public function getRescues(Request $request)
     {
         $rescue = Rescue::get();
+        if ($rescue->isEmpty()) {
+            return response()->json(['message' => 'Nenhum resgate encontrado!'], 201);
+        }
 
         return response()->json($rescue);
     }
@@ -359,7 +367,9 @@ class DoaFacilController extends Controller
     public function getCategories(Request $request)
     {
         $categories = Category::get();
-
+        if ($categories->isEmpty()) {
+            return response()->json(['message' => 'Nenhuma categoria encontrada!'], 201);
+        }
         return response()->json($categories);
     }
 
@@ -422,7 +432,9 @@ class DoaFacilController extends Controller
     public function getDonationImages(Request $request)
     {
         $donationImages = DonationImage::get();
-
+        if ($donationImages->isEmpty()) {
+            return response()->json(['message' => 'Nenhuma imagem de doação encontrada!'], 201);
+        }
         return response()->json($donationImages);
     }
 
