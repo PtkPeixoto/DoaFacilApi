@@ -84,7 +84,7 @@ class DoaFacilController extends Controller
         // Recuperação do usuário por tipo
         $user = User::where('user_type', $type)->get();
         if ($user->isEmpty()) {
-            return response()->json(['message' => 'Nenhum usuário encontrado!'], 404);
+            return response()->json(['message' => 'Nenhum usuário encontrado!'], 201);
         }
 
         return response()->json($user);
