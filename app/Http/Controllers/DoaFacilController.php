@@ -13,9 +13,10 @@ class DoaFacilController extends Controller
 {
     public function createUser(Request $request)
     {
+        dd($request->all());
         // Validação dos dados recebidos
         $validatedData = $request->validate([
-            'user_type' => 'required|string',
+            'user_type' => 'required|string|in:user,company,admin',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
