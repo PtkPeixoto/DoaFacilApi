@@ -256,7 +256,7 @@ class DoaFacilController extends Controller
         return response()->json($donations);
     }
 
-    public function getRescue(Request $request)
+    public function getRescues(Request $request)
     {
         $rescue = Rescue::get();
 
