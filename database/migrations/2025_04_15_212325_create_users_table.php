@@ -24,10 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('neighborhood')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->string('zip_code')->nullable();
+            $table->string('zipCode')->nullable();
             $table->string('cnpj')->nullable();
-            $table->string('fantasy_name')->nullable();
-            $table->string('company_name')->nullable();
+            $table->string('fantasyName')->nullable();
+            $table->string('companyName')->nullable();
             $table->timestamps();
         });
     }
