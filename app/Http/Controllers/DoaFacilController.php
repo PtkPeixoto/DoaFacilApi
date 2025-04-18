@@ -29,7 +29,7 @@ class DoaFacilController extends Controller
 
         // Validação adicional para campos específicos do tipo "company"
         if ($request->user_type === 'company') {
-            $request->validate([
+            $validatedData += $request->validate([
                 'CNPJ' => 'required|string',
                 'fantasyName' => 'required|string',
                 'companyName' => 'required|string',
