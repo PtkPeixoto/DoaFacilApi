@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/createUser', [DoaFacilController::class, 'createUser']);
 Route::get('/getUsers', [DoaFacilController::class, 'getUsers']);
 Route::get('/getUser/{id}', [DoaFacilController::class, 'getUserById']);
+Route::get('/getUsers/{type}', [DoaFacilController::class, 'getUserByType']);
 Route::get('/validateUser', [DoaFacilController::class, 'validateUser']);
 Route::put('/updateUser/{id}', [DoaFacilController::class, 'updateUser']);
 Route::delete('/deleteUser/{id}', [DoaFacilController::class, 'deleteUser']);

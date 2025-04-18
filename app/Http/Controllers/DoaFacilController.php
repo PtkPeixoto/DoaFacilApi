@@ -74,6 +74,22 @@ class DoaFacilController extends Controller
         return response()->json($user);
     }
 
+    public function getUserByType($type)
+    {
+        // Validação do tipo de usuário
+        if (!in_array($type, ['user', 'company', 'admin'])) {
+            return response()->json(['message' => 'Tipo de usuário inválido!'], 400);
+        }
+
+        // Recuperação do usuário por tipo
+        $user = User::where('user_type', $type)->get();
+        if ($user->isEmpty()) {
+            return response()->json(['message' => 'Nenhum usuário encontrado!'], 404);
+        }
+
+        return response()->json($user);
+    }
+
     public function validateUser(Request $request)
     {
         // Validação dos dados recebidos
