@@ -13,7 +13,6 @@ class DoaFacilController extends Controller
 {
     public function createUser(Request $request)
     {
-        dd($request->all());
         // Validação dos dados recebidos
         $validatedData = $request->validate([
             'user_type' => 'required|string|in:user,company,admin',
@@ -40,6 +39,7 @@ class DoaFacilController extends Controller
 
         // Criação do usuário
         $user = new User();
+        $user->user_type = $validatedData['user_type'];
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->password = bcrypt($validatedData['password']);
