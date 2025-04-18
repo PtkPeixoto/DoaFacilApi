@@ -15,7 +15,7 @@ class DoaFacilController extends Controller
     {
         // Validação dos dados recebidos
         $validatedData = $request->validate([
-            'user_type' => 'required|string|in:user,company,admin',
+            'user_type' => 'required|string',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
