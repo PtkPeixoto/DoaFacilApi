@@ -25,10 +25,16 @@ class DoaFacilController extends Controller
             'city' => 'required|string',
             'state' => 'required|string',
             'zipCode' => 'required|string',
-            'CNPJ' => 'sometimes|required_if:user_type,company|string',
-            'fantasyName' => 'sometimes|required_if:user_type,company|string',
-            'companyName' => 'sometimes|required_if:user_type,company|string',
         ]);
+
+        // Validação adicional para campos específicos do tipo "company"
+        if ($request->user_type === 'company') {
+            $request->validate([
+                'CNPJ' => 'required|string',
+                'fantasyName' => 'required|string',
+                'companyName' => 'required|string',
+            ]);
+        }
 
 
         // Criação do usuário
