@@ -21,7 +21,7 @@ class User extends Model
         'city',
         'state',
         'zipCode',
-        'CNPJ',
+        'cnpj',
         'fantasyName',
         'companyName',
     ];

@@ -49,7 +49,7 @@ class DoaFacilController extends Controller
         $user->city = $validatedData['city'];
         $user->state = $validatedData['state'];
         $user->zipCode = $validatedData['zipCode'];
-        $user->CNPJ = $validatedData['CNPJ'] ?? null;
+        $user->cnpj = $validatedData['CNPJ'] ?? null;
         $user->fantasyName = $validatedData['fantasyName'] ?? null;
         $user->companyName = $validatedData['companyName'] ?? null;
         $user->save();
