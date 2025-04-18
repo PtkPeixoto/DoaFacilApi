@@ -108,7 +108,7 @@ class DoaFacilController extends Controller
             return response()->json(['message' => 'Credenciais inválidas!'], 401);
         }
 
-        return response()->json(['message' => 'Usuário autenticado com sucesso!']);
+        return response()->json($user);
     }
 
     public function updateUser(Request $request)
