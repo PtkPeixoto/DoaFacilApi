@@ -29,9 +29,10 @@ class DoaFacilController extends Controller
             'companyName' => 'string',
         ]);
 
+
         // Criação do usuário
         $user = new User();
-        $user->name = $validatedData['nome'];
+        $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->password = bcrypt($validatedData['password']);
         $user->phone = $validatedData['phone'];
