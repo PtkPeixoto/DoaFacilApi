@@ -183,6 +183,7 @@ class DoaFacilController extends Controller
 
         // Criação da doação
         $donation = new Donation();
+        $donation->user_id = $validatedData['user_id'];
         $donation->name = $validatedData['name'];
         $donation->description = $validatedData['description'];
         $donation->quantity = $validatedData['quantity'] ?? 1;
