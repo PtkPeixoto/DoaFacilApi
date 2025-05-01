@@ -264,7 +264,11 @@ class DoaFacilController extends Controller
 
     public function getRescues(Request $request)
     {
-        $rescue = Rescue::get();
+        $rescue = Rescue::leftJoin('donations', 'rescues.donation_id', '=', 'donations.id')
+            ->leftJoin('users', 'rescues.user_id', '=', 'users.id')
+            ->leftJoin('users as donor', 'donations.user_id', '=', 'donor.id')
+            ->select('rescues.*', 'donations.name as donation_name', 'users.name as user_name', 'donor.name as donor_name')
+            ->get();
         if ($rescue->isEmpty()) {
             return response()->json(['message' => 'Nenhum resgate encontrado!'], 201);
         }
