@@ -316,7 +316,8 @@ class DoaFacilController extends Controller
         $rescue->donation_id = $validatedData['donation_id'];
         $rescue->user_id = $validatedData['user_id'];
         $rescue->rescued_quantity = $validatedData['rescued_quantity'] ?? 1;
-        $rescue->rescue_date = now();
+        $rescue->rescue_date = null;
+        $rescue->rescue_token = generateSimpleToken();
         $rescue->save();
 
         return response()->json(['message' => 'Resgate feito com sucesso!'], 201);

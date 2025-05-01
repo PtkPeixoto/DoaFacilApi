@@ -16,5 +16,6 @@ class Rescue extends Model
         'user_id',
         'rescue_date',
         'rescued_quantity',
+        'rescue_token',
     ];
 }
