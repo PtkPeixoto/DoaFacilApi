@@ -262,7 +262,7 @@ class DoaFacilController extends Controller
         return response()->json($donations);
     }
 
-    public function getRescues(Request $request)
+    public function getRescues()
     {
         $rescue = Rescue::leftJoin('donations', 'rescues.donation_id', '=', 'donations.id')
             ->leftJoin('users', 'rescues.user_id', '=', 'users.id')
@@ -276,8 +276,11 @@ class DoaFacilController extends Controller
         return response()->json($rescue);
     }
 
-    public function getRescueByFilter($id = false, $donation_id = false)
+    public function getRescueByFilter(Request $request)
     {
+        $id = $request->input('id', false);
+        $donation_id = $request->input('donation_id', false);
+
         if ($id && !is_numeric($id)) {
             return response()->json(['message' => 'ID do resgate inválido!'], 400);
         }
@@ -288,12 +291,17 @@ class DoaFacilController extends Controller
 
         $rescue = Rescue::query();
         if ($id) {
-            $rescue->where('id', $id);
+            $rescue = $rescue->where('id', $id);
         }
 
         if ($donation_id) {
-            $rescue->where('donation_id', $donation_id);
+            $rescue = $rescue->where('donation_id', $donation_id);
         }
+
+        $rescue = $rescue->leftJoin('donations', 'rescues.donation_id', '=', 'donations.id')
+            ->leftJoin('users', 'rescues.user_id', '=', 'users.id')
+            ->leftJoin('users as donor', 'donations.user_id', '=', 'donor.id')
+            ->select('rescues.*', 'donations.name as donation_name', 'users.name as user_name', 'donor.name as donor_name');
 
         $rescue = $rescue->get();
         if ($rescue->isEmpty()) {
