@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class DoaFacilController extends Controller
 {
+    function generateSimpleToken($length = 8) {
+        $characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Sem caracteres confusos
+        return substr(str_shuffle(str_repeat($characters, $length)), 0, $length);
+    }
+
     public function createUser(Request $request)
     {
         // Validação dos dados recebidos
@@ -317,7 +322,7 @@ class DoaFacilController extends Controller
         $rescue->user_id = $validatedData['user_id'];
         $rescue->rescued_quantity = $validatedData['rescued_quantity'] ?? 1;
         $rescue->rescue_date = null;
-        $rescue->rescue_token = generateSimpleToken();
+        $rescue->rescue_token = $this->generateSimpleToken(8);
         $rescue->save();
 
         return response()->json(['message' => 'Resgate feito com sucesso!'], 201);
