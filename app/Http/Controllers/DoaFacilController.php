@@ -283,11 +283,11 @@ class DoaFacilController extends Controller
 
         $rescue = Rescue::query();
         if ($user_id) {
-            $rescue = $rescue->where('user_id', $user_id);
+            $rescue = $rescue->where('donations.user_id', $user_id);
         }
 
         if ($donation_id) {
-            $rescue = $rescue->where('donation_id', $donation_id);
+            $rescue = $rescue->where('donations.id', $donation_id);
         }
 
         $rescue = $rescue->leftJoin('donations', 'rescues.donation_id', '=', 'donations.id')
