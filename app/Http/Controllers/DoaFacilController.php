@@ -281,14 +281,6 @@ class DoaFacilController extends Controller
         $user_id = $request->input('user_id', false);
         $donation_id = $request->input('donation_id', false);
 
-        if ($user_id) {
-            return response()->json(['message' => 'ID do resgate inválido!'], 400);
-        }
-
-        if ($donation_id) {
-            return response()->json(['message' => 'ID da doação inválido!'], 400);
-        }
-
         $rescue = Rescue::query();
         if ($user_id) {
             $rescue = $rescue->where('user_id', $user_id);
