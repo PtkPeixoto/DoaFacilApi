@@ -281,19 +281,18 @@ class DoaFacilController extends Controller
         $user_id = $request->input('user_id', false);
         $donation_id = $request->input('donation_id', false);
 
-        $rescue = Rescue::query();
-        if ($user_id) {
-            $rescue = $rescue->where('donations.user_id', $user_id);
-        }
-
-        if ($donation_id) {
-            $rescue = $rescue->where('donations.id', $donation_id);
-        }
-
-        $rescue = $rescue->leftJoin('donations', 'rescues.donation_id', '=', 'donations.id')
+        $rescue = Rescue::leftJoin('donations', 'rescues.donation_id', '=', 'donations.id')
             ->leftJoin('users', 'rescues.user_id', '=', 'users.id')
             ->leftJoin('users as donor', 'donations.user_id', '=', 'donor.id')
             ->select('rescues.*', 'donations.name as donation_name', 'users.name as user_name', 'donor.name as donor_name');
+
+        if ($user_id !== false) {
+            $rescue = $rescue->where('rescues.user_id', $user_id);
+        }
+
+        if ($donation_id !== false) {
+            $rescue = $rescue->where('rescues.id', $donation_id);
+        }
 
         $rescue = $rescue->get();
         if ($rescue->isEmpty()) {
