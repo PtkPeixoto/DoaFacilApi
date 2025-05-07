@@ -333,9 +333,10 @@ class DoaFacilController extends Controller
     {
         // Validação dos dados recebidos
         $validatedData = $request->validate([
-            'donation_id' => 'numeric',
-            'user_id' => 'numeric',
-            'rescued_quantity' => 'numeric',
+            'donation_id' => 'nullable|numeric',
+            'user_id' => 'nullable|numeric',
+            'rescued_quantity' => 'nullable|numeric',
+            'rescue_date' => 'nullable|date',
         ]);
 
         // Atualização do resgate
