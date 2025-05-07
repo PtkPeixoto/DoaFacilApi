@@ -329,6 +329,19 @@ class DoaFacilController extends Controller
         $rescue->rescue_token = $this->generateSimpleToken(8);
         $rescue->save();
 
+        // Atualização da doação
+        $donation = Donation::find($validatedData['donation_id']);
+        if ($donation) {
+            $donation->quantity -= $rescue->rescued_quantity;
+            $donation->save();
+        }
+
+        // Atualização do status da doação
+        if ($donation->quantity <= 0) {
+            $donation->status = 'unavailable';
+            $donation->save();
+        }
+
         return response()->json(['message' => 'Resgate feito com sucesso!'], 201);
     }
 
