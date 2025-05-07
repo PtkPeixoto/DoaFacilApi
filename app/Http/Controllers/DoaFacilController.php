@@ -305,7 +305,7 @@ class DoaFacilController extends Controller
 
         $rescue = $rescue->get();
         if ($rescue->isEmpty()) {
-            return response()->json(['message' => 'Nenhum resgate encontrado!'], 404);
+            return response()->json(['message' => 'Nenhum resgate encontrado!'], 201);
         }
 
         return response()->json($rescue);
