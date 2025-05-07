@@ -290,10 +290,13 @@ class DoaFacilController extends Controller
             ->leftJoin('users', 'rescues.user_id', '=', 'users.id')
             ->leftJoin('users as donor', 'donations.user_id', '=', 'donor.id')
             ->select('rescues.*', 'donations.name as donation_name', 'users.name as user_name','users.id as user_id', 'donor.name as donor_name','donor.id as donor_id')
-            ->where('rescues.rescue_date', null);
+            ->whereNull('rescues.rescue_date');
 
         if ($user_id !== false) {
-            $rescue = $rescue->where('rescues.user_id', $user_id)->orWhere('donations.user_id', $user_id);
+            $rescue->where(function ($query) use ($user_id) {
+                $query->where('rescues.user_id', $user_id)
+                      ->orWhere('donations.user_id', $user_id);
+            });
         }
 
         if ($donation_id !== false) {
@@ -331,7 +334,6 @@ class DoaFacilController extends Controller
 
     public function updateRescue(Request $request, $id)
     {
-        // Validação dos dados recebidos
         $validatedData = $request->validate([
             'donation_id' => 'nullable|numeric',
             'user_id' => 'nullable|numeric',
